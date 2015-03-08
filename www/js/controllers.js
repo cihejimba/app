@@ -25,27 +25,9 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('TodayCtrl', function($scope) {
-  $scope.budget = {
-    allocated: 28.84,
-    spent: 14.13,
-    scheduled: 510.00,
-    remaining: 14.71
-  };
-
-  $scope.transactions = [
-    { name: 'Vesuvio bar', status: 'pending', amount: -3.50 },
-    { name: 'Cafe me', status: 'pending', amount: -3.00 },
-    { name: 'Safeway', status: 'confirmed', amount: -5.13 },
-    { name: 'Jackson Palace', status: 'confirmed', amount: 2.50 },
-    { name: 'Rent', status: 'scheduled', amount: -500.00 },
-    { name: 'Netflix', status: 'scheduled', amount: -10.00 }
-  ];
-
-  $scope.friend = {
-    name: 'John Doe',
-    description: 'works'
-  }
+.controller('TodayCtrl', function($scope, Month, Transactions) {
+  $scope.current = Month.get();
+  $scope.transactions = Transactions.all();
 })
 
 .controller('GoalsCtrl', function($scope, Goals, $ionicModal) {
@@ -58,7 +40,7 @@ angular.module('starter.controllers', [])
 
   $scope.goal = {
     name: '',
-    ammount: '',
+    amount: '',
     months: ''
   };
 
@@ -76,7 +58,7 @@ angular.module('starter.controllers', [])
     }
     $scope.goal = {
       name: '',
-      ammount: '',
+      amount: '',
       months: ''
     };
     $scope.modal.hide();

@@ -1,30 +1,39 @@
 <ion-view title="Spendable">
   <ion-content has-header="true" padding="true">
-    <div class="list">
-      <div class="item">
-        <co-progress-bar max="{{budget.allocated}}" current="{{budget.remaining}}" color="#000" trail-width="0" stroke-width="1" duration="1500"></co-progress-bar>
+    <div class="card">
+      <div class="item item-body item-progress">
+        <h1 ng-class="{ balanced: current.progress >= 0, assertive: current.progress < 0 }">{{current.progress | currency:"$":2 }}</h1>
+        <p ng-if="current.progress >= 0">Congrats you're on your way to reach a goal</p>
+        <p ng-if="current.progress < 0">You need to save more</p>
       </div>
+
       <div class="item item-body">
         <div class="button-bar">
-          <a class="button button-positive">{{budget.allocated | currency:"$":2 }}</a>
-          <a class="button button-assertive">{{budget.spent | currency:"$":2 }}</a>
+          <a class="button button-clear"
+            ng-class="{ 'button-balanced': current.diff >= 0, 'button-assertive': current.diff < 0 }">{{current.diff | currency:"$":2 }}</a>
+          <a class="button button-clear"
+            ng-class="{ 'button-balanced': (current.progress - current.diff) >= 0, 'button-assertive': (current.progress - current.diff) < 0 }">{{ current.progress - current.diff | currency:"$":2 }}</a>
         </div>
       </div>
     </div>
     <ion-list>
       <ion-item ng-repeat="transaction in transactions" type="item-text-wrap">
-        <i class="icon" ng-class="{
-          assertive: transaction.status == 'confirmed' && transaction.amount < 0,
-          balanced: transaction.status == 'confirmed' && transaction.amount > 0,
-          stable: transaction.status == 'pending',
-          'ion-arrow-left-c': transaction.amount < 0,
-          'ion-arrow-right-c': transaction.amount > 0,
-          royal: transaction.status == 'scheduled'
-        }"></i>
-        {{transaction.name}}
-        <span class="item-note">
-          {{transaction.amount | currency:"$":2 }}
-        </span>
+        <h2>
+          {{transaction.merchant}}
+          <span class="item-note">
+            {{transaction.amount | currency:"$":2 }}
+            <i class="icon" ng-class="{
+            assertive: !transaction.pending && transaction.amount < 0,
+            balanced: !transaction.pending && transaction.amount > 0,
+            stable: transaction.pending,
+            'ion-arrow-right-c': transaction.amount < 0,
+            'ion-arrow-left-c': transaction.amount > 0
+            }"></i>
+          </span>
+        </h2>
+        <p>
+          {{transaction.datetime | date:"short" }}
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>

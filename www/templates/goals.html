@@ -7,10 +7,13 @@
   <ion-content class="has-header">
     <ion-list>
       <ion-item ng-repeat="goal in goals" type="item-text-wrap">
-        {{goal.name}}
-        <span class="item-note">
-          {{goal.ammount | currency:"$":0 }}
-        </span>
+        <h2>
+          {{goal.name}}
+          <span class="item-note">
+            {{goal.amount | currency:"$":0 }}
+          </span>
+        </h2>
+        <p>In {{goal.months}} months</p>
         <ion-option-button class="button-calm"
           ng-click="editGoal(goal)">
           Edit
