@@ -11,8 +11,7 @@
         <div class="button-bar">
           <a class="button button-clear"
             ng-class="{ 'button-balanced': current.diff >= 0, 'button-assertive': current.diff < 0 }">{{current.diff | currency:"$":2 }}</a>
-          <a class="button button-clear"
-            ng-class="{ 'button-balanced': (current.progress - current.diff) >= 0, 'button-assertive': (current.progress - current.diff) < 0 }">{{ current.progress - current.diff | currency:"$":2 }}</a>
+          <a class="button button-clear button-royal">{{ -(current.progress - current.diff) | currency:"$":2 }}</a>
         </div>
       </div>
     </div>
