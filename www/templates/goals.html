@@ -1,0 +1,26 @@
+<ion-view title="Goals">
+  <ion-nav-buttons side="right">
+    <button class="button button-clear button-positive" ng-click="showAddGoal()">
+      Add
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="goal in goals" type="item-text-wrap">
+        {{goal.name}}
+        <span class="item-note">
+          {{goal.ammount | currency:"$":0 }}
+        </span>
+        <ion-option-button class="button-calm"
+          ng-click="editGoal(goal)">
+          Edit
+        </ion-option-button>
+        <ion-option-button class="button-assertive"
+          ng-click="deleteGoal(goal)">
+          Delete
+        </ion-option-button>
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Add new goal!</h1>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Goal name" ng-model="goal.name">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Ammount" ng-model="goal.ammount">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Months" ng-model="goal.months">
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" ng-click="addGoal()">Submit</button>
+        <button class="button button-block button-assertive" ng-click="close()">Cancel</button>
+      </div>
+    </ion-content>
+  </ion-modal-view>
