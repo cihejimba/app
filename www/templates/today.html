@@ -1,4 +1,4 @@
-<ion-view title="Spendable">
+<ion-view title="reFI Overview">
   <ion-content has-header="true" padding="true">
     <div class="card">
       <div class="item item-body item-progress">
@@ -20,15 +20,13 @@
       <ion-item ng-repeat="transaction in transactions" type="item-text-wrap">
         <h2>
           {{transaction.merchant}}
-          <span class="item-note">
+          <span class="item-note"
+            ng-class="{
+              assertive: !transaction.pending && transaction.amount < 0,
+              balanced: !transaction.pending && transaction.amount > 0,
+              dark: transaction.pending
+            }">
             {{transaction.amount | currency:"$":2 }}
-            <i class="icon" ng-class="{
-            assertive: !transaction.pending && transaction.amount < 0,
-            balanced: !transaction.pending && transaction.amount > 0,
-            stable: transaction.pending,
-            'ion-arrow-right-c': transaction.amount < 0,
-            'ion-arrow-left-c': transaction.amount > 0
-            }"></i>
           </span>
         </h2>
         <p>
